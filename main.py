@@ -1,4 +1,4 @@
-import pygame, ui
+import pygame, ui, random
 
 # settings
 WIDTH = 1024
@@ -18,15 +18,16 @@ MAP_Y = HEIGHT / 12
 MAP_WIDTH = WIDTH
 MAP_HEIGHT = WIDTH / 2
 
-SCORE_X = MAP_Y * 2
+SCORE_X = MAP_Y * 3
 SCORE_Y = MAP_Y / 8
-SCORE_WIDTH = WIDTH - MAP_Y * 2
+SCORE_WIDTH = WIDTH - SCORE_X
 SCORE_HEIGHT = MAP_Y / 1.25
 
 CONTINENT_DATA = {
-    "america": {"food": ["donut"], "min_coords": (11, 13), "max_coords": (87, 68)},
-    "europe": {"food": ["bread"], "min_coords": (121, 18), "max_coords": (152, 35)},
-    "africa": {"food": ["human"], "min_coords": (113, 38), "max_coords": (163, 87)},
+    "north_america": {"food": ["donut"], "min_coords": (11, 7), "max_coords": (87, 55)},
+    "south_america": {"food": ["donut"], "min_coords": (67, 57), "max_coords": (100, 101)},
+    "europe": {"food": ["bread"], "min_coords": (121, 15), "max_coords": (152, 40)},
+    "africa": {"food": ["human"], "min_coords": (113, 38), "max_coords": (163, 90)},
     "asia": {"food": ["rice"], "min_coords": (160, 16), "max_coords": (245, 55)},
     "australia": {"food": ["spaghetti"], "min_coords": (202, 71), "max_coords": (239, 94)},
     "antarctica": {"food": ["spaghetti"], "min_coords": (0, 112), "max_coords": (256, 128)}
@@ -47,7 +48,7 @@ font = pygame.font.Font("data/font.ttf", 16)
 map = pygame.image.load("data/images/map.png")
 
 # values
-score = 25
+score = 0
 
 running = True
 while running:
@@ -57,10 +58,24 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                score = 0
+            elif event.key == pygame.K_UP:
+                score += random.randint(1, 10)
+            elif event.key == pygame.K_DOWN:
+                score -= random.randint(1, 10)
 
     # displaying things on screen
+
+    # draw background
     screen.fill(BACKGROUND_COLOUR)
+
+    # show world map
     screen.blit(pygame.transform.scale(map, (MAP_WIDTH, MAP_HEIGHT)), (MAP_X, MAP_Y))
+
+    # draw score bar
+    ui.display_score_bar(screen, SCORE_X, SCORE_Y, SCORE_WIDTH, SCORE_HEIGHT, SCORE_COLOUR, BORDER_COLOUR, BORDER_WIDTH, RECT_ROUNDNESS, score)
 
     for continent in CONTINENT_DATA:
         continent_min_x = CONTINENT_DATA[continent]["min_coords"][0] * 4
@@ -89,8 +104,6 @@ while running:
                 ui.write_continent_name(screen, font, continent, TEXT_COLOUR)
                 break
 
-    # draw score bar
-    ui.display_score_bar(screen, SCORE_X, SCORE_Y, SCORE_WIDTH, SCORE_HEIGHT, SCORE_COLOUR, TEXT_COLOUR, BORDER_WIDTH, RECT_ROUNDNESS, score)
 
     pygame.display.update()
 

@@ -21,5 +21,5 @@ def display_score_bar(screen, x, y, width, height, colour, border_colour, border
 
 def write_continent_name(screen, font, continent_name, text_colour):
     # write a text indicating the selected continent name
-    text = font.render(continent_name.capitalize(), False, text_colour)
+    text = font.render(continent_name.capitalize().replace("_", " "), False, text_colour)
     screen.blit(text, text.get_rect())

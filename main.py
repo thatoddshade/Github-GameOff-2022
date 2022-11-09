@@ -5,14 +5,23 @@ WIDTH = 1024
 HEIGHT = 640
 TITLE = "Cliché"
 
+BORDER_WIDTH = 4
+RECT_ROUNDNESS = 15
+
 BACKGROUND_COLOUR = "#0e071b"
 BORDER_COLOUR = "#ffeb57"
 TEXT_COLOUR = "#edab50"
+SCORE_COLOUR = "#5ac54f"
 
-MAP_WIDTH = WIDTH
-MAP_HEIGHT = WIDTH / 2
 MAP_X = 0
 MAP_Y = HEIGHT / 12
+MAP_WIDTH = WIDTH
+MAP_HEIGHT = WIDTH / 2
+
+SCORE_X = MAP_Y * 2
+SCORE_Y = MAP_Y / 8
+SCORE_WIDTH = WIDTH - MAP_Y * 2
+SCORE_HEIGHT = MAP_Y / 1.25
 
 CONTINENT_DATA = {
     "america": {"food": ["donut"], "min_coords": (11, 13), "max_coords": (87, 68)},
@@ -36,6 +45,9 @@ pygame.mouse.set_cursor(cursor)
 # resource loading
 font = pygame.font.Font("data/font.ttf", 16)
 map = pygame.image.load("data/images/map.png")
+
+# values
+score = 25
 
 running = True
 while running:
@@ -71,13 +83,30 @@ while running:
                     continent_width,
                     continent_height
                 )
-                pygame.draw.rect(screen, BORDER_COLOUR, border, 4, 15)
+                pygame.draw.rect(screen, BORDER_COLOUR, border, BORDER_WIDTH, RECT_ROUNDNESS)
 
                 # write a text indicating the selected continent name
                 continent_name = font.render(continent.capitalize(), False, TEXT_COLOUR)
                 screen.blit(continent_name, continent_name.get_rect())
                 break
 
+    # draw score bar
+    score_rect = pygame.Rect(
+        SCORE_X,
+        SCORE_Y,
+        (score / 100) * SCORE_WIDTH,
+        SCORE_HEIGHT
+    )
+    pygame.draw.rect(screen, SCORE_COLOUR, score_rect, border_radius=RECT_ROUNDNESS)
+
+    # draw score border
+    score_border = pygame.Rect(
+        SCORE_X,
+        SCORE_Y,
+        SCORE_WIDTH,
+        SCORE_HEIGHT
+    )
+    pygame.draw.rect(screen, TEXT_COLOUR, score_border, BORDER_WIDTH, RECT_ROUNDNESS)
 
     pygame.display.update()
 

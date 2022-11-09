@@ -1,4 +1,4 @@
-import pygame
+import pygame, ui
 
 # settings
 WIDTH = 1024
@@ -86,27 +86,11 @@ while running:
                 pygame.draw.rect(screen, BORDER_COLOUR, border, BORDER_WIDTH, RECT_ROUNDNESS)
 
                 # write a text indicating the selected continent name
-                continent_name = font.render(continent.capitalize(), False, TEXT_COLOUR)
-                screen.blit(continent_name, continent_name.get_rect())
+                ui.write_continent_name(screen, font, continent, TEXT_COLOUR)
                 break
 
     # draw score bar
-    score_rect = pygame.Rect(
-        SCORE_X,
-        SCORE_Y,
-        (score / 100) * SCORE_WIDTH,
-        SCORE_HEIGHT
-    )
-    pygame.draw.rect(screen, SCORE_COLOUR, score_rect, border_radius=RECT_ROUNDNESS)
-
-    # draw score border
-    score_border = pygame.Rect(
-        SCORE_X,
-        SCORE_Y,
-        SCORE_WIDTH,
-        SCORE_HEIGHT
-    )
-    pygame.draw.rect(screen, TEXT_COLOUR, score_border, BORDER_WIDTH, RECT_ROUNDNESS)
+    ui.display_score_bar(screen, SCORE_X, SCORE_Y, SCORE_WIDTH, SCORE_HEIGHT, SCORE_COLOUR, TEXT_COLOUR, BORDER_WIDTH, RECT_ROUNDNESS, score)
 
     pygame.display.update()
 

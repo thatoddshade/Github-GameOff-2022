@@ -1,37 +1,7 @@
-import pygame, ui, random
-
-# settings
-WIDTH = 1024
-HEIGHT = 640
-TITLE = "Cliché"
-
-BORDER_WIDTH = 4
-RECT_ROUNDNESS = 15
-
-BACKGROUND_COLOUR = "#0e071b"
-BORDER_COLOUR = "#ffeb57"
-TEXT_COLOUR = "#edab50"
-SCORE_COLOUR = "#5ac54f"
-
-MAP_X = 0
-MAP_Y = HEIGHT / 12
-MAP_WIDTH = WIDTH
-MAP_HEIGHT = WIDTH / 2
-
-SCORE_X = MAP_Y * 3
-SCORE_Y = MAP_Y / 8
-SCORE_WIDTH = WIDTH - SCORE_X
-SCORE_HEIGHT = MAP_Y / 1.25
-
-CONTINENT_DATA = {
-    "north_america": {"food": ["donut"], "min_coords": (11, 7), "max_coords": (87, 55)},
-    "south_america": {"food": ["donut"], "min_coords": (67, 57), "max_coords": (100, 101)},
-    "europe": {"food": ["bread"], "min_coords": (121, 15), "max_coords": (152, 40)},
-    "africa": {"food": ["human"], "min_coords": (113, 38), "max_coords": (163, 90)},
-    "asia": {"food": ["rice"], "min_coords": (160, 16), "max_coords": (245, 55)},
-    "australia": {"food": ["spaghetti"], "min_coords": (202, 71), "max_coords": (239, 94)},
-    "antarctica": {"food": ["spaghetti"], "min_coords": (0, 112), "max_coords": (256, 128)}
-}
+import random
+import pygame
+import ui
+from settings import *
 
 # window setup
 pygame.init()
@@ -39,16 +9,22 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption(TITLE)
 
 # custom mouse pointer
-surf = pygame.image.load('data/images/cursor.png').convert_alpha()
-cursor = pygame.cursors.Cursor((0, 0), surf)
+cursor = pygame.cursors.Cursor(pygame.SYSTEM_CURSOR_CROSSHAIR)
 pygame.mouse.set_cursor(cursor)
 
 # resource loading
-font = pygame.font.Font("data/font.ttf", 16)
+font = pygame.font.Font("data/font.ttf", FONT_SIZE)
 map = pygame.image.load("data/images/map.png")
 
 # values
 score = 0
+
+selectioned_continent = None
+
+current_food = random.choice(list(FOOD_DATA.keys()))
+def change_food():
+    global current_food
+    current_food = random.choice(list(FOOD_DATA.keys()))
 
 running = True
 while running:
@@ -62,13 +38,15 @@ while running:
             if event.key == pygame.K_SPACE:
                 score = 0
             elif event.key == pygame.K_UP:
-                score += random.randint(1, 10)
+                score += 1
             elif event.key == pygame.K_DOWN:
-                score -= random.randint(1, 10)
+                score -= 1
+            if event.key == pygame.K_TAB:
+                change_food()
 
     # displaying things on screen
 
-    # draw background
+    # fill screen with background colour
     screen.fill(BACKGROUND_COLOUR)
 
     # show world map
@@ -76,6 +54,12 @@ while running:
 
     # draw score bar
     ui.display_score_bar(screen, SCORE_X, SCORE_Y, SCORE_WIDTH, SCORE_HEIGHT, SCORE_COLOUR, BORDER_COLOUR, BORDER_WIDTH, RECT_ROUNDNESS, score)
+
+    # display random food
+    food_img = pygame.image.load(f"data/images/food/{current_food}.png")
+    food_size = (food_img.get_width() * 2, food_img.get_height() * 2)
+    food_img = pygame.transform.scale(food_img, food_size)
+    screen.blit(food_img, mouse_pos)
 
     for continent in CONTINENT_DATA:
         continent_min_x = CONTINENT_DATA[continent]["min_coords"][0] * 4

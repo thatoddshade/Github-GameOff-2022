@@ -19,8 +19,11 @@ map = pygame.image.load("data/images/map.png")
 # values
 score = 0
 
-selectioned_continent = None
+# continent
+selectioned_continent = False
+selectioned_continent_name = "north_america"
 
+# food
 current_food = random.choice(list(FOOD_DATA.keys()))
 def change_food():
     global current_food
@@ -35,16 +38,22 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                score = 0
-            elif event.key == pygame.K_UP:
-                score += 1
-            elif event.key == pygame.K_DOWN:
-                score -= 1
             if event.key == pygame.K_TAB:
                 change_food()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if selectioned_continent:
+                if current_food in CONTINENT_DATA[selectioned_continent_name]["food"]:
+                    score += random.randint(MIN_SCORE_GAIN, MAX_SCORE_GAIN)
+                else:
+                    score -= random.randint(MIN_SCORE_GAIN, MAX_SCORE_GAIN)
+                change_food()
+                print(f"dropping {current_food.capitalize()} in {selectioned_continent_name.capitalize()} !!!!!!!")
 
-    # displaying things on screen
+    # updating and displaying things on screen
+
+    # fixing score
+    if score < 0:
+        score = 0
 
     # fill screen with background colour
     screen.fill(BACKGROUND_COLOUR)
@@ -61,6 +70,7 @@ while running:
     food_img = pygame.transform.scale(food_img, food_size)
     screen.blit(food_img, mouse_pos)
 
+    selectioned_continent = False
     for continent in CONTINENT_DATA:
         continent_min_x = CONTINENT_DATA[continent]["min_coords"][0] * 4
         continent_min_y = CONTINENT_DATA[continent]["min_coords"][1] * 4
@@ -86,6 +96,10 @@ while running:
 
                 # write a text indicating the selected continent name
                 ui.write_continent_name(screen, font, continent, TEXT_COLOUR)
+
+                # update variables
+                selectioned_continent = True
+                selectioned_continent_name = continent
                 break
 
 

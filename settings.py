@@ -5,6 +5,9 @@ WIDTH = 1024
 HEIGHT = 640
 TITLE = "Cliché"
 
+MIN_SCORE_GAIN = 3
+MAX_SCORE_GAIN = 12
+
 FONT_SIZE = 16
 
 BORDER_WIDTH = 4
@@ -32,11 +35,11 @@ FOOD_DATA = {
 }
 
 CONTINENT_DATA = {
-    "north_america": {"food": ["donut"], "min_coords": (11, 7), "max_coords": (87, 55)},
-    "south_america": {"food": ["donut"], "min_coords": (67, 57), "max_coords": (100, 101)},
-    "europe": {"food": ["bread"], "min_coords": (121, 15), "max_coords": (152, 40)},
-    "africa": {"food": ["bread"], "min_coords": (113, 38), "max_coords": (163, 90)},
-    "asia": {"food": ["bread"], "min_coords": (160, 16), "max_coords": (245, 55)},
-    "australia": {"food": ["bread"], "min_coords": (202, 71), "max_coords": (239, 94)},
-    "antarctica": {"food": ["bread"], "min_coords": (0, 112), "max_coords": (256, 128)},
+    "north_america": {"food": ["donut", "python"], "min_coords": (11, 7), "max_coords": (87, 55)},
+    "south_america": {"food": ["donut", "python"], "min_coords": (67, 57), "max_coords": (100, 101)},
+    "europe": {"food": ["bread", "python"], "min_coords": (121, 15), "max_coords": (152, 40)},
+    "africa": {"food": ["bread", "python"], "min_coords": (113, 38), "max_coords": (163, 90)},
+    "asia": {"food": ["bread", "python"], "min_coords": (160, 16), "max_coords": (245, 55)},
+    "australia": {"food": ["bread", "python"], "min_coords": (202, 71), "max_coords": (239, 94)},
+    "antarctica": {"food": ["bread", "python"], "min_coords": (0, 112), "max_coords": (256, 128)},
 }

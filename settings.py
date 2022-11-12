@@ -13,6 +13,10 @@ MAX_SCORE_GAIN = 12  # maximum random score gain
 FOOD_FALLING_TIME = 1875  # milliseconds
 FOOD_TRANSFORMATION_VALUE = 1  # falling food transformation speed
 
+SOUNDS = {
+    "food_drop": ["data/sounds/food_drop1.ogg", "data/sounds/food_drop2.ogg"]
+}
+
 FONT_SIZE = 16
 
 TIME_X = WIDTH / 2.5

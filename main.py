@@ -50,11 +50,12 @@ falling_food = []
 clock = pygame.time.Clock()
 running = True
 while running:
-    if not score > 100:
-        mouse_pos = pygame.mouse.get_pos()
-
-        # checking events
-        for event in pygame.event.get():
+    mouse_pos = pygame.mouse.get_pos()
+    # checking events
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        if not score > 100:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if selected_continent:
                     if current_food in CONTINENT_DATA[selected_continent_name]["food"]:
@@ -66,9 +67,12 @@ while running:
                     falling_food.append(food.FallingFood(mouse_pos[0], mouse_pos[1], current_food))
                     change_food()
                     pygame.mouse.set_pos(random.randint(0, WIDTH), random.randint(0, HEIGHT))
+                    
+                    sound = pygame.mixer.Sound(random.choice(SOUNDS["food_drop"]))
+                    pygame.mixer.Sound.play(sound)
 
         # updating and displaying things on screen
-
+    if not score > 100:
         # fix score
         if score < 0:
             score = 0
@@ -155,10 +159,6 @@ while running:
         screen.blit(end_screen, (0, 0))
     
     ui.write_time(screen, font, current_time, TEXT_COLOUR)
-
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
 
     clock.tick(60)
     pygame.display.update()

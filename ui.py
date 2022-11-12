@@ -1,6 +1,8 @@
 import pygame
 
-def display_score_bar(screen, x, y, width, height, colour, border_colour, border_width, radius=0, score=0):
+from settings import TIME_X, TIME_Y
+
+def display_bar(screen, x, y, width, height, colour, border_colour, border_width, radius=0, score=0):
     # draw score bar
     score_rect = pygame.Rect(
         x,
@@ -23,3 +25,9 @@ def write_continent_name(screen, font, continent_name, text_colour):
     # write a text indicating the selected continent name
     text = font.render(continent_name.capitalize().replace("_", " "), False, text_colour)
     screen.blit(text, text.get_rect())
+
+
+def write_time(screen, font, time, text_colour):
+    # write a text indicating the selected continent name
+    text = font.render("Seconds : " + str(time).capitalize(), False, text_colour)
+    screen.blit(text, (TIME_X, TIME_Y, text.get_width(), text.get_height()))

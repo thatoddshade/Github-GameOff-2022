@@ -1,14 +1,23 @@
 import pygame
 
 # settings
-WIDTH = 1024
-HEIGHT = 640
-TITLE = "Cliché"
+WIDTH = 1024  # window width
+HEIGHT = 640  # window height
+TITLE = "Cliché"  # window title
 
-MIN_SCORE_GAIN = 3
-MAX_SCORE_GAIN = 12
+SHAKING_VALUE = 30
+
+MIN_SCORE_GAIN = 3  # minimum random score gain
+MAX_SCORE_GAIN = 12  # maximum random score gain
+
+FOOD_FALLING_TIME = 1875  # milliseconds
+FOOD_TRANSFORMATION_VALUE = 1  # falling food transformation speed
 
 FONT_SIZE = 16
+
+TIME_X = WIDTH / 2.5
+TIME_Y = HEIGHT * 0.96
+
 
 BORDER_WIDTH = 4
 RECT_ROUNDNESS = 15
@@ -31,13 +40,14 @@ SCORE_HEIGHT = MAP_Y / 1.25
 FOOD_DATA = {
     "bread": "data/images/food/bread.png",
     "donut": "data/images/food/donut.png",
+    "croissant": "data/images/food/croissant.png",
     "python": "data/images/food/python.png"
 }
 
 CONTINENT_DATA = {
     "north_america": {"food": ["donut", "python"], "min_coords": (11, 7), "max_coords": (87, 55)},
     "south_america": {"food": ["donut", "python"], "min_coords": (67, 57), "max_coords": (100, 101)},
-    "europe": {"food": ["bread", "python"], "min_coords": (121, 15), "max_coords": (152, 40)},
+    "europe": {"food": ["bread", "croissant", "python"], "min_coords": (121, 15), "max_coords": (152, 40)},
     "africa": {"food": ["bread", "python"], "min_coords": (113, 38), "max_coords": (163, 90)},
     "asia": {"food": ["bread", "python"], "min_coords": (160, 16), "max_coords": (245, 55)},
     "australia": {"food": ["bread", "python"], "min_coords": (202, 71), "max_coords": (239, 94)},

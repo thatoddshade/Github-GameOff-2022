@@ -108,12 +108,6 @@ while running:
         # update timer
         current_time = math.floor(time.time() - start_time)
 
-        # display random food
-        food_img = pygame.image.load(f"data/images/food/{current_food}.png")
-        food_size = (food_img.get_width() * 2, food_img.get_height() * 2)
-        food_img = pygame.transform.scale(food_img, food_size)
-        screen.blit(food_img, mouse_pos)
-
         # update continent values
         selected_continent = False
         for continent in CONTINENT_DATA:
@@ -139,7 +133,7 @@ while running:
                         continent_width,
                         continent_height
                     )
-                    pygame.draw.rect(screen, BORDER_COLOUR,
+                    pygame.draw.rect(screen, (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)),
                                      border, BORDER_WIDTH, RECT_ROUNDNESS)
 
                     # write a text indicating the selected continent name
@@ -151,7 +145,13 @@ while running:
                     selected_continent_name = continent
                     break
 
-            # update food
+        # update food
+
+        # display food
+        food_img = pygame.image.load(f"data/images/food/{current_food}.png")
+        food_size = (food_img.get_width() * 2, food_img.get_height() * 2)
+        food_img = pygame.transform.scale(food_img, food_size)
+        screen.blit(food_img, mouse_pos)
 
             # kill fallen food
         for i in range(len(falling_food) - 1):

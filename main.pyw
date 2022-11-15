@@ -11,6 +11,9 @@ pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption(TITLE)
 
+icon = pygame.image.load('data/images/food/python.png')
+pygame.display.set_icon(icon)
+
 # custom mouse pointer
 cursor = pygame.cursors.Cursor(pygame.SYSTEM_CURSOR_CROSSHAIR)
 pygame.mouse.set_cursor(cursor)
@@ -40,9 +43,12 @@ selected_continent_name = "north_america"
 
 # food
 current_food = random.choice(list(FOOD_DATA.keys()))
+
+
 def change_food():
     global current_food
     current_food = random.choice(list(FOOD_DATA.keys()))
+
 
 falling_food = []
 
@@ -64,11 +70,14 @@ while running:
                     else:
                         score -= random.randint(MIN_SCORE_GAIN, MAX_SCORE_GAIN)
                         shaking += 15
-                    falling_food.append(food.FallingFood(mouse_pos[0], mouse_pos[1], current_food))
+                    falling_food.append(food.FallingFood(
+                        mouse_pos[0], mouse_pos[1], current_food))
                     change_food()
-                    pygame.mouse.set_pos(random.randint(0, WIDTH), random.randint(0, HEIGHT))
-                    
-                    sound = pygame.mixer.Sound(random.choice(SOUNDS["food_drop"]))
+                    pygame.mouse.set_pos(random.randint(
+                        0, WIDTH), random.randint(0, HEIGHT))
+
+                    sound = pygame.mixer.Sound(
+                        random.choice(SOUNDS["food_drop"]))
                     pygame.mixer.Sound.play(sound)
 
         # updating and displaying things on screen
@@ -83,15 +92,19 @@ while running:
         # show world map
         if shaking > 0:
             shaking -= 1
-            x_map_offset = random.randint(int(SHAKING_VALUE / -1), SHAKING_VALUE)
-            y_map_offset = random.randint(int(SHAKING_VALUE / -1), SHAKING_VALUE)
+            x_map_offset = random.randint(
+                int(SHAKING_VALUE / -1), SHAKING_VALUE)
+            y_map_offset = random.randint(
+                int(SHAKING_VALUE / -1), SHAKING_VALUE)
 
-        screen.blit(pygame.transform.scale(map, (MAP_WIDTH, MAP_HEIGHT)), (MAP_X + x_map_offset, MAP_Y + y_map_offset))
+        screen.blit(pygame.transform.scale(map, (MAP_WIDTH, MAP_HEIGHT)),
+                    (MAP_X + x_map_offset, MAP_Y + y_map_offset))
         x_map_offset, y_map_offset = (0, 0)
 
         # draw score bar
-        ui.display_bar(screen, SCORE_X, SCORE_Y, SCORE_WIDTH, SCORE_HEIGHT, SCORE_COLOUR, BORDER_COLOUR, BORDER_WIDTH, RECT_ROUNDNESS, score)
-        
+        ui.display_bar(screen, SCORE_X, SCORE_Y, SCORE_WIDTH, SCORE_HEIGHT,
+                       SCORE_COLOUR, BORDER_COLOUR, BORDER_WIDTH, RECT_ROUNDNESS, score)
+
         # update timer
         current_time = math.floor(time.time() - start_time)
 
@@ -110,13 +123,15 @@ while running:
             continent_max_x = CONTINENT_DATA[continent]["max_coords"][0] * 4
             continent_max_y = CONTINENT_DATA[continent]["max_coords"][1] * 4
 
-            continent_width = (CONTINENT_DATA[continent]["max_coords"][0] - CONTINENT_DATA[continent]["min_coords"][0]) * 4
-            continent_height = (CONTINENT_DATA[continent]["max_coords"][1] - CONTINENT_DATA[continent]["min_coords"][1]) * 4
+            continent_width = (
+                CONTINENT_DATA[continent]["max_coords"][0] - CONTINENT_DATA[continent]["min_coords"][0]) * 4
+            continent_height = (
+                CONTINENT_DATA[continent]["max_coords"][1] - CONTINENT_DATA[continent]["min_coords"][1]) * 4
 
             # check if player is selecting a continent
             if mouse_pos[0] - MAP_X > continent_min_x and mouse_pos[1] - MAP_Y > continent_min_y:
                 if mouse_pos[0] - MAP_X < continent_max_x and mouse_pos[1] - MAP_Y < continent_max_y:
-                    
+
                     # draw a rectangle around the selected continent
                     border = pygame.Rect(
                         continent_min_x + MAP_X,
@@ -124,40 +139,41 @@ while running:
                         continent_width,
                         continent_height
                     )
-                    pygame.draw.rect(screen, BORDER_COLOUR, border, BORDER_WIDTH, RECT_ROUNDNESS)
+                    pygame.draw.rect(screen, BORDER_COLOUR,
+                                     border, BORDER_WIDTH, RECT_ROUNDNESS)
 
                     # write a text indicating the selected continent name
-                    ui.write_continent_name(screen, font, continent, TEXT_COLOUR)
+                    ui.write_continent_name(
+                        screen, font, continent, TEXT_COLOUR)
 
                     # update variables
                     selected_continent = True
                     selected_continent_name = continent
                     break
-            
+
             # update food
-            
+
             # kill fallen food
         for i in range(len(falling_food) - 1):
             f = falling_food[i]
             if pygame.time.get_ticks() - f.drop_time >= f.falling_time:
                 del falling_food[i]
-        
+
         # apply food falling animation
         for f in falling_food:
             f.trans()
             screen.blit(f.image, f.position)
-        
+
             if greening > 0:
                 greening -= 1
                 green_surf = pygame.Surface((WIDTH, HEIGHT))
                 green_surf.set_alpha(75)
                 green_surf.fill("green")
                 screen.blit(green_surf, (0, 0))
-            
 
     elif score > 100:
         screen.blit(end_screen, (0, 0))
-    
+
     ui.write_time(screen, font, current_time, TEXT_COLOUR)
 
     clock.tick(60)

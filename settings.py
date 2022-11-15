@@ -41,10 +41,14 @@ SCORE_Y = MAP_Y / 8
 SCORE_WIDTH = WIDTH - SCORE_X
 SCORE_HEIGHT = MAP_Y / 1.25
 
+
 FOOD_DATA = {
     "bread": "data/images/food/bread.png",
     "donut": "data/images/food/donut.png",
     "croissant": "data/images/food/croissant.png",
+    "rice": "data/images/food/rice.png",
+    "kangaroo": "data/images/food/kangaroo.png",
+    "crocodile": "data/images/food/crocodile.png",
     "python": "data/images/food/python.png"
 }
 
@@ -52,8 +56,8 @@ CONTINENT_DATA = {
     "north_america": {"food": ["donut", "python"], "min_coords": (11, 7), "max_coords": (87, 55)},
     "south_america": {"food": ["donut", "python"], "min_coords": (67, 57), "max_coords": (100, 101)},
     "europe": {"food": ["bread", "croissant", "python"], "min_coords": (121, 15), "max_coords": (152, 40)},
-    "africa": {"food": ["bread", "python"], "min_coords": (113, 38), "max_coords": (163, 90)},
-    "asia": {"food": ["bread", "python"], "min_coords": (160, 16), "max_coords": (245, 55)},
-    "australia": {"food": ["bread", "python"], "min_coords": (202, 71), "max_coords": (239, 94)},
+    "africa": {"food": ["crocodile", "python"], "min_coords": (113, 38), "max_coords": (163, 90)},
+    "asia": {"food": ["rice", "python"], "min_coords": (160, 16), "max_coords": (245, 55)},
+    "australia": {"food": ["kangaroo", "python"], "min_coords": (202, 71), "max_coords": (239, 94)},
     "antarctica": {"food": ["bread", "python"], "min_coords": (0, 112), "max_coords": (256, 128)},
 }

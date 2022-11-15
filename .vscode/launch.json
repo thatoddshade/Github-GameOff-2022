@@ -17,7 +17,7 @@
             "request": "launch",
             "name": "Main File",
             "cwd": "${workspaceFolder}",
-            "program": "${workspaceFolder}\\main.py"
+            "program": "${workspaceFolder}\\main.pyw"
         }
     ]
 }

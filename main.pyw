@@ -67,18 +67,21 @@ while running:
                     if current_food in CONTINENT_DATA[selected_continent_name]["food"]:
                         score += random.randint(MIN_SCORE_GAIN, MAX_SCORE_GAIN)
                         greening += 15
+                        sound = pygame.mixer.Sound(
+                            SOUNDS["food_drop"][0])
+                        pygame.mixer.Sound.play(sound)
                     else:
                         score -= random.randint(MIN_SCORE_GAIN, MAX_SCORE_GAIN)
                         shaking += 15
+                        sound = pygame.mixer.Sound(
+                            SOUNDS["food_drop"][1])
+
+                        pygame.mixer.Sound.play(sound)
                     falling_food.append(food.FallingFood(
                         mouse_pos[0], mouse_pos[1], current_food))
                     change_food()
                     pygame.mouse.set_pos(random.randint(
                         0, WIDTH), random.randint(0, HEIGHT))
-
-                    sound = pygame.mixer.Sound(
-                        random.choice(SOUNDS["food_drop"]))
-                    pygame.mixer.Sound.play(sound)
 
         # updating and displaying things on screen
     if not score > 100:

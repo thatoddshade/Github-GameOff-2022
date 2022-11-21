@@ -1,5 +1,4 @@
 import pygame
-
 from settings import TIME_X, TIME_Y
 
 def display_bar(screen, x, y, width, height, colour, border_colour, border_width, radius=0, score=0):

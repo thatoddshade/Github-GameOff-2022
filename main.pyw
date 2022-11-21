@@ -44,6 +44,12 @@ selected_continent_name = "north_america";
 # food
 current_food = random.choice(list(FOOD_DATA.keys()));
 
+# Starting the mixer
+pygame.mixer.init()
+# Loading the song
+pygame.mixer.music.load(SOUNDS["music"])
+# Start playing the song
+pygame.mixer.music.play(-1, 0, 7500)
 
 def change_food():
     global current_food;

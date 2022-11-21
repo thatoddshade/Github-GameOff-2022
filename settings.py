@@ -14,7 +14,8 @@ FOOD_FALLING_TIME = 1875  # milliseconds
 FOOD_TRANSFORMATION_VALUE = 1  # falling food transformation speed
 
 SOUNDS = {
-    "food_drop": ["data/sounds/food_drop1.ogg", "data/sounds/food_drop2.ogg"]
+    "food_drop": ["data/sounds/food_drop1.ogg", "data/sounds/food_drop2.ogg"],
+    "music": "data/sounds/hunger.ogg",
 }
 
 FONT_SIZE = 16

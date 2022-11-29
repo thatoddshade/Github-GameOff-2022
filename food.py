@@ -1,7 +1,8 @@
 import pygame
 from settings import *
 
-class FallingFood():
+
+class FallingFood:
     def __init__(self, x, y, food_type):
         # general setup
         self.type = food_type
@@ -16,7 +17,9 @@ class FallingFood():
 
         # time
         self.falling_time = FOOD_FALLING_TIME
-        self.drop_time = pygame.time.get_ticks()  # amount of ticks when food starts dropping
+        self.drop_time = (
+            pygame.time.get_ticks()
+        )  # amount of ticks when food starts dropping
 
     def trans(self):
         # calculate new values
@@ -28,4 +31,3 @@ class FallingFood():
         # apply values
         self.image = pygame.transform.scale(self.image, (self.width, self.height))
         self.image = pygame.transform.rotate(self.image, self.rotation)
-

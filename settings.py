@@ -10,8 +10,9 @@ SHAKING_VALUE = 30
 MIN_SCORE_GAIN = 3  # minimum random score gain
 MAX_SCORE_GAIN = 12  # maximum random score gain
 
-FOOD_FALLING_TIME = 1875  # milliseconds
+FOOD_FALLING_TIME = 1875  # time during which food falls in miliseconds
 FOOD_TRANSFORMATION_VALUE = 1  # falling food transformation speed
+MAX_FOOD_HOLDING_TIME = 3  # time remaining before food drops automaticilly in seconds
 
 SOUNDS = {
     "food_drop": ["data/sounds/food_drop1.ogg", "data/sounds/food_drop2.ogg"],
@@ -50,15 +51,43 @@ FOOD_DATA = {
     "kangaroo": "data/images/food/kangaroo.png",
     "crocodile": "data/images/food/crocodile.png",
     "piranha": "data/images/food/piranha.png",
-    "python": "data/images/food/python.png"
+    "python": "data/images/food/python.png",
 }
 
 CONTINENT_DATA = {
-    "north_america": {"food": ["donut", "python"], "min_coords": (11, 7), "max_coords": (87, 55)},
-    "south_america": {"food": ["piranha", "python"], "min_coords": (67, 57), "max_coords": (100, 101)},
-    "europe": {"food": ["bread", "croissant", "python"], "min_coords": (121, 15), "max_coords": (152, 40)},
-    "africa": {"food": ["crocodile", "python"], "min_coords": (113, 38), "max_coords": (163, 90)},
-    "asia": {"food": ["rice", "python"], "min_coords": (160, 16), "max_coords": (245, 55)},
-    "australia": {"food": ["kangaroo", "python"], "min_coords": (202, 71), "max_coords": (239, 94)},
-    "antarctica": {"food": ["bread", "python"], "min_coords": (0, 112), "max_coords": (256, 128)},
+    "north_america": {
+        "food": ["donut", "python"],
+        "min_coords": (11, 7),
+        "max_coords": (87, 55),
+    },
+    "south_america": {
+        "food": ["piranha", "python"],
+        "min_coords": (67, 57),
+        "max_coords": (100, 101),
+    },
+    "europe": {
+        "food": ["bread", "croissant", "python"],
+        "min_coords": (121, 15),
+        "max_coords": (152, 40),
+    },
+    "africa": {
+        "food": ["crocodile", "python"],
+        "min_coords": (113, 38),
+        "max_coords": (163, 90),
+    },
+    "asia": {
+        "food": ["rice", "python"],
+        "min_coords": (160, 16),
+        "max_coords": (245, 55),
+    },
+    "australia": {
+        "food": ["kangaroo", "python"],
+        "min_coords": (202, 71),
+        "max_coords": (239, 94),
+    },
+    "antarctica": {
+        "food": ["bread", "python"],
+        "min_coords": (0, 112),
+        "max_coords": (256, 128),
+    },
 }

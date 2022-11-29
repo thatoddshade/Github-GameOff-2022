@@ -17,7 +17,7 @@ MAX_FOOD_HOLDING_TIME = 3  # time remaining before food drops automaticilly in s
 SOUNDS = {
     "food_drop": ["data/sounds/food_drop1.ogg", "data/sounds/food_drop2.ogg"],
     "music": "data/sounds/hunger.ogg",
-    "defeat": "data/sounds/defeat.wav",
+    "defeat": "data/sounds/defeat.ogg",
 }
 
 FONT_SIZE = 16

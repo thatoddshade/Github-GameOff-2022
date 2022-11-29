@@ -8,10 +8,10 @@ from settings import *
 
 # window setup
 pygame.init()
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
+screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN)
 pygame.display.set_caption(TITLE)
 
-icon = pygame.image.load("data/images/food/python.png")
+icon = pygame.image.load("data/images/icon.ico")
 pygame.display.set_icon(icon)
 
 # custom mouse pointer
@@ -98,6 +98,7 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
         if not (score > 100 or score < 0):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if selected_continent:

@@ -3,7 +3,7 @@ import pygame
 # settings
 WIDTH = 1024  # window width
 HEIGHT = 640  # window height
-TITLE = "Cliché"  # window title
+TITLE = "GéograFood"  # window title
 
 SHAKING_VALUE = 30
 
@@ -17,6 +17,7 @@ MAX_FOOD_HOLDING_TIME = 3  # time remaining before food drops automaticilly in s
 SOUNDS = {
     "food_drop": ["data/sounds/food_drop1.ogg", "data/sounds/food_drop2.ogg"],
     "music": "data/sounds/hunger.ogg",
+    "defeat": "data/sounds/defeat.wav",
 }
 
 FONT_SIZE = 16
@@ -32,6 +33,7 @@ BACKGROUND_COLOUR = "#2a2f4e"
 BORDER_COLOUR = "#fa9384"
 TEXT_COLOUR = "#edab50"
 SCORE_COLOUR = "#25775a"
+RFT_COLOUR = "#db3ffd"
 
 MAP_X = 0
 MAP_Y = HEIGHT / 12
@@ -42,6 +44,11 @@ SCORE_X = MAP_Y * 3
 SCORE_Y = MAP_Y / 8
 SCORE_WIDTH = WIDTH - SCORE_X
 SCORE_HEIGHT = MAP_Y / 1.25
+
+RFT_X = 0
+RFT_Y = HEIGHT * 0.91
+RFT_WIDTH = SCORE_WIDTH / 2.5
+RFT_HEIGHT = SCORE_HEIGHT
 
 FOOD_DATA = {
     "bread": "data/images/food/bread.png",

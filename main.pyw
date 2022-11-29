@@ -21,8 +21,8 @@ pygame.mouse.set_cursor(cursor)
 # resource loading
 font = pygame.font.Font("data/font.ttf", FONT_SIZE)
 map = pygame.image.load("data/images/map.png")
-end_screen = pygame.transform.scale(
-    pygame.image.load("data/images/end_screen.png"), (WIDTH, HEIGHT)
+victory_screen = pygame.transform.scale(
+    pygame.image.load("data/images/victory_screen.png"), (WIDTH, HEIGHT)
 )
 
 defeat_screen = pygame.transform.scale(
@@ -98,7 +98,7 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        if not score > 100:
+        if not (score > 100 or score < 0):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if selected_continent:
                     sound = None
@@ -143,6 +143,20 @@ while running:
             BORDER_WIDTH,
             RECT_ROUNDNESS,
             score,
+        )
+
+        # draw remaining time before food drop
+        ui.display_bar(
+            screen,
+            RFT_X,
+            RFT_Y,
+            RFT_WIDTH,
+            RFT_HEIGHT,
+            RFT_COLOUR,
+            BORDER_COLOUR,
+            BORDER_WIDTH,
+            RECT_ROUNDNESS,
+            int(food_holding_time / MAX_FOOD_HOLDING_TIME * 100),
         )
 
         # update timer
@@ -212,7 +226,6 @@ while running:
         screen.blit(food_img, mouse_pos)
 
         food_holding_time = time.time() - start_holding_food
-        print(food_holding_time)
         if food_holding_time > MAX_FOOD_HOLDING_TIME:
             wrong_food()
 
@@ -235,9 +248,18 @@ while running:
                 screen.blit(green_surf, (0, 0))
 
     else:
+        # stop music
+        pygame.mixer.music.stop()
+
+        # display the end screen depending on whether the player has won or not
         if score > 100:
-            screen.blit(end_screen, (0, 0))
+            screen.blit(victory_screen, (0, 0))
         elif score < 0:
+            # play defeat sound
+            defeat_channel = pygame.mixer.Channel(2)
+            defeat_sound = pygame.mixer.Sound(SOUNDS["defeat"])
+            defeat_channel.play(defeat_sound)
+
             screen.blit(defeat_screen, (0, 0))
 
     ui.write_time(screen, font, current_time, TEXT_COLOUR)

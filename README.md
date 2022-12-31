@@ -8,4 +8,4 @@
 
 @Guyt0u (music)
 
-@Shad0w-57 (me, code, graphics, design...)
+@ThatOddShade (me, code, graphics, design...)

@@ -1,9 +1,11 @@
 # Github-GameOff-2022
- Cliché
+
+Cliché
+Food dropping game made for Github GameOff 2022.
  
 ###### The word *cliché* is borrowed from French.
 
-# Contributors
+## Contributors
 @Calcifer-45 (some graphics)
 
 @Guyt0u (music)
